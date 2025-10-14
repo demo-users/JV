@@ -1,0 +1,96 @@
+import java.awt.*;
+import java.awt.event.*;
+
+// Custom Exception
+class LoginException extends Exception {
+    LoginException(String msg) {
+        super(msg);
+    }
+}
+
+class H extends Frame implements ActionListener
+{
+     Label l1,l2,l3;
+     TextField t1,t2;
+     Button b1,b2;
+     int attempts=0;
+	H()
+	{
+	      l1=new Label("UserName");
+	      l1.setBounds(100,150,70,30);
+	      add(l1);
+
+	      l2=new Label("Password");
+          l2.setBounds(100,250,70,30);
+          add(l2);
+
+          l3=new Label("");
+	      l3.setBounds(100,370,300,30);
+	      add(l3);
+
+	      t1=new TextField();
+          t1.setBounds(200,150,200,25);
+          add(t1);
+
+	      t2=new TextField();
+	      t2.setEchoChar('*');
+          t2.setBounds(200,250,200,25);
+          add(t2);
+          
+	       b1=new Button("Login"); 
+	        b1.addActionListener(this);   
+	       b1.setBounds(100,320,50,30);
+           add(b1);
+
+	      b2=new Button("Clear");
+          b2.setBounds(200,320,50,30);
+          b2.addActionListener(this);
+	      add(b2);
+
+	       setSize(600,700);
+	       setLayout(null);
+          setVisible(true);
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		String s=e.getActionCommand();
+		if(s.equals("Clear"))
+		{
+			t1.setText("");
+			t2.setText("");
+			l3.setText("");
+		}
+		else
+		
+			if(s.equals("Login"))
+			{
+				String s1=t1.getText();
+				String s2=t2.getText();
+                  try{
+				if(s1.equals(s2))
+				{
+					l3.setText("Login success");
+				}
+			    else {
+                    attempts++;
+                    throw new LoginException("Invalid Login! Attempts left: " + (3 - attempts));
+                    }
+                 }
+                  catch (LoginException ex)
+                   {
+                     l3.setText(ex.getMessage());
+                  if (attempts >= 3)
+                   {
+                    l3.setText("3 Attempts Over! Access Denied.");
+                    b1.setEnabled(false); // disable login after 3 tries
+                   }
+            }
+			}
+		
+	}
+
+	public static void main(String args[])
+	{
+	   new H();
+	}
+}
