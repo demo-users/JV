@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+// User Defined Exception
+class CovidPositiveException extends Exception {
+    CovidPositiveException(String msg) {
+        super(msg);
+    }
+}
+
+class Patient {
+    String name;
+    int age;
+    int oxyLevel;
+    int hrctReport;
+
+    // Constructor
+    Patient(String n, int a, int oxy, int hrct) {
+        name = n;
+        age = a;
+        oxyLevel = oxy;
+        hrctReport = hrct;
+    }
+
+    // Method to check covid condition
+    void check() throws CovidPositiveException {
+        if (oxyLevel < 95 && hrctReport > 10) {
+            // Condition matched → throw exception
+            throw new CovidPositiveException("Patient is Covid Positive(+) and Need to Hospitalized");
+        } else {
+            // Otherwise display info
+            display();
+        }
+    }
+
+    // Display method
+    void display() {
+        System.out.println("\nPatient Details:");
+        System.out.println("Name : " + name);
+        System.out.println("Age : " + age);
+        System.out.println("Oxygen Level : " + oxyLevel + "%");
+        System.out.println("HRCT Report : " + hrctReport);
+    }
+}
+
+public class F {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Taking input
+        System.out.print("Enter Patient Name: ");
+        String n = sc.nextLine();
+
+        System.out.print("Enter Age: ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter Oxygen Level: ");
+        int oxy = sc.nextInt();
+
+        System.out.print("Enter HRCT Report: ");
+        int hrct = sc.nextInt();
+
+        // Create patient object
+        Patient p = new Patient(n, a, oxy, hrct);
+
+        // Handle Exception
+        try {
+            p.check();
+        } catch (CovidPositiveException e) {
+            System.out.println("\nException: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}
