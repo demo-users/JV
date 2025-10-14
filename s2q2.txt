@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+class CricketPlayer {
+    String name;
+    int no_of_innings;
+    int no_of_times_notout;
+    int total_runs;
+    double bat_avg;
+
+    // Constructor
+    CricketPlayer(String n, int inn, int notout, int runs) {
+        name = n;
+        no_of_innings = inn;
+        no_of_times_notout = notout;
+        total_runs = runs;
+        bat_avg = avg();  // batting average calculate karo
+    }
+
+    // Method to calculate average
+    double avg() {
+        int denominator = no_of_innings - no_of_times_notout;
+        if (denominator == 0)
+            return total_runs;   // divide by zero avoid
+        return (double) total_runs / denominator;
+    }
+
+    // Static method to sort players by average (descending order)
+    public static void sort(CricketPlayer p[]) {
+        for (int i = 0; i < p.length - 1; i++) {
+            for (int j = i + 1; j < p.length; j++) {
+                if (p[i].bat_avg < p[j].bat_avg) {
+                    CricketPlayer temp = p[i];
+                    p[i] = p[j];
+                    p[j] = temp;
+                }
+            }
+        }
+    }
+
+    // Display method
+    void display() {
+        System.out.println(name + "\t" + no_of_innings + "\t" + no_of_times_notout + "\t" + total_runs + "\t" + bat_avg);
+    }
+
+    // Main Method
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of players: ");
+        int n = sc.nextInt();
+
+        CricketPlayer players[] = new CricketPlayer[n];
+
+        // Input from user
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details of player " + (i + 1));
+            System.out.print("Name: ");
+            String name = sc.next();
+            System.out.print("No of Innings: ");
+            int inn = sc.nextInt();
+            System.out.print("No of Times Not Out: ");
+            int notout = sc.nextInt();
+            System.out.print("Total Runs: ");
+            int runs = sc.nextInt();
+
+            players[i] = new CricketPlayer(name, inn, notout, runs);
+        }
+
+        // Sort players by average
+        CricketPlayer.sort(players);
+
+        // Display sorted list
+        System.out.println("\nName\tInnings\tNotOut\tRuns\tAverage");
+        for (int i = 0; i < players.length; i++) {
+            players[i].display();
+        }
+
+        sc.close();
+    }
+}
