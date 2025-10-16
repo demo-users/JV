@@ -1,0 +1,27 @@
+interface Operation {
+    double PI = 3.142;  // constant
+
+    double volume();    // abstract method
+}
+
+class Cylinder implements Operation {
+    double radius, height;
+
+    // parameterized constructor
+    Cylinder(double r, double h) {
+        radius = r;
+        height = h;
+    }
+
+    // implement volume() method
+    public double volume() {
+        return PI * radius * radius * height;
+    }
+}
+
+class Main {
+    public static void main(String args[]) {
+        Cylinder c = new Cylinder(5, 10);  // create object
+        System.out.println("Volume of Cylinder = " + c.volume());
+    }
+}

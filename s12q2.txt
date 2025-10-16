@@ -1,0 +1,69 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class SimpleCalculator extends JFrame implements ActionListener {
+    JTextField text;
+    JButton[] buttons;
+    String[] labels = {
+        "1","2","3","+",
+        "4","5","6","-",
+        "7","8","9","*",
+        "0",".","=","/"
+    };
+    String operator = "";
+    double num1 = 0, num2 = 0;
+
+    SimpleCalculator() {
+        text = new JTextField();
+        text.setEditable(false);
+        setLayout(new BorderLayout());
+        add(text, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4,4,5,5));
+        buttons = new JButton[16];
+
+        for(int i=0; i<16; i++) {
+            buttons[i] = new JButton(labels[i]);
+            buttons[i].addActionListener(this);
+            panel.add(buttons[i]);
+        }
+
+        add(panel, BorderLayout.CENTER);
+        setTitle("Simple Calculator");
+        setSize(300,400);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String cmd = e.getActionCommand();
+
+        if(cmd.charAt(0) >= '0' && cmd.charAt(0) <= '9' || cmd.equals(".")) {
+            text.setText(text.getText() + cmd);
+        } else if(cmd.equals("+") || cmd.equals("-") || cmd.equals("*") || cmd.equals("/")) {
+            num1 = Double.parseDouble(text.getText());
+            operator = cmd;
+            text.setText("");
+        } else if(cmd.equals("=")) {
+            num2 = Double.parseDouble(text.getText());
+            switch(operator) {
+                case "+": text.setText(Double.toString(num1 + num2)); break;
+                case "-": text.setText(Double.toString(num1 - num2)); break;
+                case "*": text.setText(Double.toString(num1 * num2)); break;
+                case "/": 
+                    if(num2 != 0)
+                        text.setText(Double.toString(num1 / num2));
+                    else
+                        text.setText("Error");
+                    break;
+            }
+            operator = "";
+        }
+    }
+
+    public static void main(String[] args) {
+        new SimpleCalculator();
+    }
+}

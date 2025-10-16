@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+// Superclass
+class Customer {
+    String name;
+    String phoneNumber;
+
+    void readCustomer() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Customer Name: ");
+        name = sc.nextLine();
+        System.out.print("Enter Phone Number: ");
+        phoneNumber = sc.nextLine();
+    }
+
+    void displayCustomer() {
+        System.out.println("Customer Name: " + name);
+        System.out.println("Phone Number: " + phoneNumber);
+    }
+}
+
+// Derived class
+class Depositor extends Customer {
+    int accNo;
+    double balance;
+
+    void readDepositor() {
+        super.readCustomer();  // Read Customer details
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Account Number: ");
+        accNo = sc.nextInt();
+        System.out.print("Enter Balance: ");
+        balance = sc.nextDouble();
+    }
+
+    void displayDepositor() {
+        super.displayCustomer();  // Display Customer details
+        System.out.println("Account Number: " + accNo);
+        System.out.println("Balance: " + balance);
+    }
+}
+
+// Derived class from Depositor
+class Borrower extends Depositor {
+    int loanNo;
+    double loanAmount;
+
+    void readBorrower() {
+        super.readDepositor();  // Read Depositor (and Customer) details
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Loan Number: ");
+        loanNo = sc.nextInt();
+        System.out.print("Enter Loan Amount: ");
+        loanAmount = sc.nextDouble();
+    }
+
+    void displayBorrower() {
+        super.displayDepositor();  // Display Depositor (and Customer) details
+        System.out.println("Loan Number: " + loanNo);
+        System.out.println("Loan Amount: " + loanAmount);
+    }
+}
+
+// Main class
+ class CustomerDetails {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of customers: ");
+        int n = sc.nextInt();
+
+        Borrower[] customers = new Borrower[n];
+
+        // Read details
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for customer " + (i + 1) + ":");
+            customers[i] = new Borrower();
+            customers[i].readBorrower();
+        }
+
+        // Display details
+        System.out.println("\n--- Customer Details ---");
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nCustomer " + (i + 1) + ":");
+            customers[i].displayBorrower();
+        }
+    }
+}

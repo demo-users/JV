@@ -1,0 +1,68 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class MenuExample extends Frame implements ActionListener {
+    MenuItem newItem, openItem, saveItem, exitItem;
+    CheckboxMenuItem showAbout;
+
+    MenuExample() {
+        setTitle("Java AWT Examples");
+
+        MenuBar mb = new MenuBar();
+
+        Menu file = new Menu("File");
+        Menu edit = new Menu("Edit");
+        Menu about = new Menu("About");
+
+        newItem = new MenuItem("New", new MenuShortcut(KeyEvent.VK_N));
+        openItem = new MenuItem("Open");
+        saveItem = new MenuItem("Save");
+        exitItem = new MenuItem("Exit");
+        showAbout = new CheckboxMenuItem("Show About", true);
+
+        file.add(newItem);
+        file.add(openItem);
+        file.add(saveItem);
+        file.addSeparator();
+        file.add(exitItem);
+
+        about.add(showAbout);
+
+        mb.add(file);
+        mb.add(edit);
+        mb.add(about);
+
+        setMenuBar(mb);
+
+        newItem.addActionListener(this);
+        openItem.addActionListener(this);
+        saveItem.addActionListener(this);
+        exitItem.addActionListener(this);
+        showAbout.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println("Show About: " + showAbout.getState());
+            }
+        });
+
+        setSize(400, 300);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if (s.equals("Exit"))
+            dispose();
+        else
+            System.out.println(s + " selected");
+    }
+
+    public static void main(String args[]) {
+        new MenuExample();
+    }
+}

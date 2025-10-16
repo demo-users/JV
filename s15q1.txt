@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.Scanner;
+
+class FileCopyBooks {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter source file name: ");
+        String sourceFile = sc.nextLine();
+
+        System.out.print("Enter destination file name: ");
+        String destFile = sc.nextLine();
+
+        File src = new File(sourceFile);
+        if(!src.exists()) {
+            System.out.println("Source file does not exist.");
+            sc.close();
+            return;
+        }
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(src));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(destFile));
+
+            String line;
+            while((line = br.readLine()) != null) {
+                bw.write(line);
+                bw.newLine();
+            }
+
+            br.close();
+            bw.close();
+
+            System.out.println("Contents copied successfully from " + sourceFile + " to " + destFile);
+
+        } catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}

@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.event.*;
+
+ class SubjectComboBox extends JFrame implements ActionListener {
+
+    JComboBox<String> comboBox;
+    JButton showButton;
+    JTextField resultLabel;
+
+    SubjectComboBox() {
+        // Frame settings
+        setTitle("T.Y.B.Sc. Subjects");
+        setSize(400, 200);
+        setLayout(null); // Using absolute positioning
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Combo box with subjects
+        String[] subjects = {
+            "Data Structures",
+            "Java Programming",
+            "Operating Systems",
+            "Database Management System",
+            "Computer Networks",
+            "Software Engineering"
+        };
+        comboBox = new JComboBox<>(subjects);
+        comboBox.setBounds(50, 30, 200, 25);
+        add(comboBox);
+
+        // Button to display selected subject
+        showButton = new JButton("Show Subject");
+        showButton.setBounds(50, 70, 150, 25);
+        showButton.addActionListener(this);
+        add(showButton);
+
+        // Label to display result
+        resultLabel = new  JTextField("Selected Subject  :  ");
+        resultLabel.setBounds(50, 110, 300, 25);
+        add(resultLabel);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String selectedSubject = (String) comboBox.getSelectedItem();
+        resultLabel.setText("Selected Subject: " + selectedSubject);
+    }
+
+    public static void main(String[] args) {
+        new SubjectComboBox();
+    }
+}

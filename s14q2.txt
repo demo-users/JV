@@ -1,0 +1,110 @@
+import SY.SYMarks;
+import TY.TYMarks;
+import java.util.Scanner;
+
+class Student {
+    int rollNumber;
+    String name;
+    SYMarks sy;
+    TYMarks ty;
+
+    public Student(int rollNumber, String name, SYMarks sy, TYMarks ty) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.sy = sy;
+        this.ty = ty;
+    }
+
+    public void displayResult() {
+        int totalComputerMarks = sy.ComputerTotal + ty.Theory + ty.Practicals;
+        char grade;
+
+        if(totalComputerMarks >= 70)
+            grade = 'A';
+        else if(totalComputerMarks >= 60)
+            grade = 'B';
+        else if(totalComputerMarks >= 50)
+            grade = 'C';
+        else if(totalComputerMarks >= 40)
+            grade = 'P';
+        else
+            grade = 'F';
+
+        System.out.println("Roll No: " + rollNumber);
+        System.out.println("Name: " + name);
+        System.out.println("Total Computer Marks (SY+TY): " + totalComputerMarks);
+        System.out.println("Grade: " + grade);
+        System.out.println("---------------------------");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of students: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        Student[] students = new Student[n];
+
+        for(int i=0; i<n; i++) {
+            System.out.println("Enter details for student " + (i+1));
+            System.out.print("Roll Number: ");
+            int roll = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.println("Enter SY Marks (Computer, Maths, Electronics): ");
+            int syComp = sc.nextInt();
+            int syMaths = sc.nextInt();
+            int syElec = sc.nextInt();
+
+            System.out.println("Enter TY Marks (Theory, Practicals): ");
+            int tyTheory = sc.nextInt();
+            int tyPract = sc.nextInt();
+            sc.nextLine();
+
+            SYMarks sy = new SYMarks(syComp, syMaths, syElec);
+            TYMarks ty = new TYMarks(tyTheory, tyPract);
+            students[i] = new Student(roll, name, sy, ty);
+        }
+
+        System.out.println("\nRESULTS:");
+        for(Student s : students) {
+            s.displayResult();
+        }
+
+        sc.close();
+    }
+}
+
+//SY Package
+
+package SY;
+
+public class SYMarks {
+    public int ComputerTotal;
+    public int MathsTotal;
+    public int ElectronicsTotal;
+
+    public SYMarks(int comp, int maths, int elec) {
+        this.ComputerTotal = comp;
+        this.MathsTotal = maths;
+        this.ElectronicsTotal = elec;
+    }
+}
+
+//Ty Package name
+
+package TY;
+
+public class TYMarks {
+    public int Theory;
+    public int Practicals;
+
+    public TYMarks(int theory, int practicals) {
+        this.Theory = theory;
+        this.Practicals = practicals;
+    }
+}
