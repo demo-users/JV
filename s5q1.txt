@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+class Continent {
+    String continentName;
+    Continent(String continentName) {
+        this.continentName = continentName;
+    }
+    void displayContinent() {
+        System.out.println("Continent: " + continentName);
+    }
+}
+
+class Country extends Continent {
+    String countryName;
+    Country(String continentName, String countryName) {
+        super(continentName);
+        this.countryName = countryName;
+    }
+    void displayCountry() {
+        displayContinent();
+        System.out.println("Country: " + countryName);
+    }
+}
+
+class State extends Country {
+    String stateName, placeName;
+    State(String continentName, String countryName, String stateName, String placeName) {
+        super(continentName, countryName);
+        this.stateName = stateName;
+        this.placeName = placeName;
+    }
+    void displayDetails() {
+        displayCountry();
+        System.out.println("State: " + stateName);
+        System.out.println("Place: " + placeName);
+    }
+}
+
+class I {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Continent: ");
+        String continentName = sc.nextLine();
+
+        System.out.print("Enter Country: ");
+        String countryName = sc.nextLine();
+
+        System.out.print("Enter State: ");
+        String stateName = sc.nextLine();
+
+        System.out.print("Enter Place: ");
+        String placeName = sc.nextLine();
+
+        State s1 = new State(continentName, countryName, stateName, placeName);
+        s1.displayDetails();
+
+        sc.close();
+    }
+}

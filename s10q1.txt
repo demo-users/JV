@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+// Functional Interface
+@FunctionalInterface
+interface Cube {
+    int calculate(int x);
+}
+
+// Normal class implementing interface
+class CubeImpl implements Cube {
+    public int calculate(int x) {
+        return x * x * x;
+    }
+}
+ class CubeExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+
+        // Object of implementing class
+        Cube c = new CubeImpl();
+
+        System.out.println("Cube of " + num + " is: " + c.calculate(num));
+    }
+}

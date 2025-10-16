@@ -1,0 +1,33 @@
+class Employee {
+    int empId;
+    String empName;
+    String empDesignation;
+    double empSal;
+
+    // Constructor
+    Employee(int empId, String empName, String empDesignation, double empSal) {
+        this.empId = empId;
+        this.empName = empName;
+        this.empDesignation = empDesignation;
+        this.empSal = empSal;
+    }
+
+    // toString() override
+    public String toString() {
+        return "Employee ID: " + empId +
+               "\nEmployee Name: " + empName +
+               "\nDesignation: " + empDesignation +
+               "\nSalary: " + empSal;
+    }
+}
+
+// Main class
+ class EmployeeDemo {
+    public static void main(String[] args) {
+        // Employee object create
+        Employee e1 = new Employee(101, "Rohit Sharma", "Manager", 55000.50);
+
+        // toString() automatically call ho jata hai print karte time
+        System.out.println(e1);
+    }
+}

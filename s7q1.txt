@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class Bank {
+    int balance = 0;  // start with zero balance
+
+    // Deposit method
+    void deposit(int amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    // Withdraw method
+    void withdraw(int amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient Balance!");
+        }
+    }
+
+    // Show balance method
+    void showBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Bank acc = new Bank();
+
+        int choice;
+        do {
+            System.out.println("\n--- Bank Menu ---");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Show Balance");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: ");
+                    int d = sc.nextInt();
+                    acc.deposit(d);
+                    break;
+                case 2:
+                    System.out.print("Enter amount to withdraw: ");
+                    int w = sc.nextInt();
+                    acc.withdraw(w);
+                    break;
+                case 3:
+                    acc.showBalance();
+                    break;
+                case 4:
+                    System.out.println("Thank you for using Bank!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 4);
+
+        sc.close();
+    }
+}

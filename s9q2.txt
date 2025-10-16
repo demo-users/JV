@@ -1,0 +1,51 @@
+interface MarkerInterface { }
+
+class Product implements MarkerInterface {
+    int product_id;
+    String product_name;
+    double product_cost;
+    int product_quantity;
+    static int count = 0;
+
+    Product() {
+        product_id = 0;
+        product_name = "Unknown";
+        product_cost = 0.0;
+        product_quantity = 0;
+        count++;
+    }
+
+    Product(int id, String name, double cost, int qty) {
+        product_id = id;
+        product_name = name;
+        product_cost = cost;
+        product_quantity = qty;
+        count++;
+    }
+
+    void display() {
+        System.out.println("Product ID: " + product_id);
+        System.out.println("Product Name: " + product_name);
+        System.out.println("Product Cost: " + product_cost);
+        System.out.println("Product Quantity: " + product_quantity);
+        System.out.println("-----------------------------");
+    }
+
+    static void showCount() {
+        System.out.println("Total Products Created: " + count);
+    }
+
+    public static void main(String[] args) {
+        Product p1 = new Product();
+        Product p2 = new Product(101, "Laptop", 55000.50, 2);
+        Product p3 = new Product(102, "Mouse", 500.75, 10);
+      Product p4 = new Product();
+
+        p1.display();
+        p2.display();
+        p3.display();
+        p4.display();
+
+        Product.showCount();
+    }
+}

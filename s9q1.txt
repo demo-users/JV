@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class Clock {
+    private int hours, minutes, seconds;
+
+    // Constructor
+    Clock(int h, int m, int s) {
+        if (isValid(h, m, s)) {
+            hours = h;
+            minutes = m;
+            seconds = s;
+        } else {
+            System.out.println("Invalid Time!");
+            hours = minutes = seconds = 0;
+        }
+    }
+
+    // Validity check
+    boolean isValid(int h, int m, int s) {
+        return (h >= 0 && h <= 23) && (m >= 0 && m <= 59) && (s >= 0 && s <= 59);
+    }
+
+    // Display in 24-hour format
+    void show24Hour() {
+        System.out.printf("24-Hour Format: %02d:%02d:%02d\n", hours, minutes, seconds);
+    }
+
+    // Display in 12-hour AM/PM format
+    void show12Hour() {
+        String ampm = (hours >= 12) ? "PM" : "AM";
+        int h = hours % 12;
+        if (h == 0) h = 12;
+        System.out.printf("12-Hour Format: %02d:%02d:%02d %s\n", h, minutes, seconds, ampm);
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Hours: ");
+        int h = sc.nextInt();
+
+        System.out.print("Enter Minutes: ");
+        int m = sc.nextInt();
+
+        System.out.print("Enter Seconds: ");
+        int s = sc.nextInt();
+
+        Clock c = new Clock(h, m, s);
+        c.show24Hour();
+        c.show12Hour();
+
+        sc.close();
+    }
+}

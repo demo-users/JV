@@ -1,0 +1,75 @@
+import java.util.Scanner;
+import student.StudentInfo;
+import student.StudentPer;
+
+public class MainApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Roll No: ");
+        int roll = sc.nextInt();
+        sc.nextLine(); // buffer clear
+
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Class: ");
+        String cls = sc.nextLine();
+
+        int[] marks = new int[6];
+        System.out.println("Enter marks of 6 subjects: ");
+        for (int i = 0; i < 6; i++) {
+            System.out.print("Subject " + (i + 1) + ": ");
+            marks[i] = sc.nextInt();
+        }
+
+        // Use StudentPer to calculate percentage
+        StudentPer sp = new StudentPer();
+        double per = sp.findPercentage(marks);
+
+        // Pass details to StudentInfo and display
+        StudentInfo si = new StudentInfo(roll, name, cls, per);
+        si.display();
+    }
+}
+
+
+//Student package ke andar paste karna hai
+
+
+package student;
+
+public class StudentInfo {
+    private int rollno;
+    private String name;
+    private String cls;
+    private double percentage;
+
+    public StudentInfo(int rollno, String name, String cls, double percentage) {
+        this.rollno = rollno;
+        this.name = name;
+        this.cls = cls;
+        this.percentage = percentage;
+    }
+
+    public void display() {
+        System.out.println("\n--- Student Information ---");
+        System.out.println("Roll No   : " + rollno);
+        System.out.println("Name      : " + name);
+        System.out.println("Class     : " + cls);
+        System.out.println("Percentage: " + percentage + "%");
+    }
+}
+// second 
+
+package student;
+
+public class StudentPer {
+    public double findPercentage(int[] marks) {
+        int total = 0;
+        for (int m : marks) {
+            total += m;
+        }
+        return (total / 6.0); // average of 6 subjects
+    }
+}

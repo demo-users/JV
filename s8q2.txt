@@ -1,0 +1,45 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class MouseEventsDemo extends Frame implements MouseListener, MouseMotionListener {
+    TextField tf;
+
+    MouseEventsDemo() {
+        // Frame Title
+        setTitle("Mouse Events Example");
+
+        // TextField to display mouse click position
+        tf = new TextField(30);
+        add(tf, BorderLayout.SOUTH);
+
+        // Add Mouse Listeners
+        addMouseListener(this);
+        addMouseMotionListener(this);
+
+        // Frame properties
+        setSize(400, 300);
+        setVisible(true);
+    }
+
+    // MouseListener methods
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        tf.setText("Mouse Clicked at: (" + x + ", " + y + ")");
+    }
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+
+    // MouseMotionListener methods
+    public void mouseMoved(MouseEvent e) {
+        setTitle("Mouse Moved at: (" + e.getX() + ", " + e.getY() + ")");
+    }
+    public void mouseDragged(MouseEvent e) {}
+
+    // Main method
+    public static void main(String[] args) {
+        new MouseEventsDemo();
+    }
+}

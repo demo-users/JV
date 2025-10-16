@@ -1,0 +1,93 @@
+import java.util.Scanner;
+
+// Abstract class
+abstract class Order {
+    int id;
+    String description;
+
+    abstract void accept();
+    abstract void display();
+}
+
+// Subclass: Purchase Order
+class PurchaseOrder extends Order {
+    String customerName;
+
+    void accept() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Purchase Order ID: ");
+        id = sc.nextInt();
+        sc.nextLine(); // consume newline
+        System.out.print("Enter Description: ");
+        description = sc.nextLine();
+        System.out.print("Enter Customer Name: ");
+        customerName = sc.nextLine();
+    }
+
+    void display() {
+        System.out.println("\n--- Purchase Order Details ---");
+        System.out.println("Order ID: " + id);
+        System.out.println("Description: " + description);
+        System.out.println("Customer Name: " + customerName);
+    }
+}
+
+// Subclass: Sales Order
+class SalesOrder extends Order {
+    String vendorName;
+
+    void accept() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Sales Order ID: ");
+        id = sc.nextInt();
+        sc.nextLine(); // consume newline
+        System.out.print("Enter Description: ");
+        description = sc.nextLine();
+        System.out.print("Enter Vendor Name: ");
+        vendorName = sc.nextLine();
+    }
+
+    void display() {
+        System.out.println("\n--- Sales Order Details ---");
+        System.out.println("Order ID: " + id);
+        System.out.println("Description: " + description);
+        System.out.println("Vendor Name: " + vendorName);
+    }
+}
+
+// Main class
+ class O {
+    public static void main(String[] args) {
+
+        PurchaseOrder p[] = new PurchaseOrder[3];
+        SalesOrder s[] = new SalesOrder[3];
+
+        System.out.println("====== ENTER PURCHASE ORDERS ======");
+        for (int i = 0; i < 3; i++) {
+            System.out.println("\nEnter details for Purchase Order " + (i + 1));
+            p[i] = new PurchaseOrder();
+            p[i].accept();
+        }
+
+        System.out.println("\n====== ENTER SALES ORDERS ======");
+        for (int i = 0; i < 3; i++) {
+            System.out.println("\nEnter details for Sales Order " + (i + 1));
+            s[i] = new SalesOrder();
+            s[i].accept();
+        }
+
+        System.out.println("\n\n===============================");
+        System.out.println("📦 PURCHASE ORDERS DETAILS");
+        System.out.println("===============================");
+        for (int i = 0; i < 3; i++) {
+            p[i].display();
+        }
+
+        System.out.println("\n===============================");
+        System.out.println("💰 SALES ORDERS DETAILS");
+        System.out.println("===============================");
+        for (int i = 0; i < 3; i++) {
+            s[i].display();
+        }
+    }
+}

@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+class Sphere {
+    double radius;
+
+    void accept() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter radius of the sphere: ");
+        radius = sc.nextDouble();
+    }
+
+    double surfaceArea() {
+        return 4 * 3.14 * radius * radius;
+    }
+
+    double volume() {
+        return (4.0 / 3.0) * 3.14 * radius * radius * radius;
+    }
+
+    void display() {
+        System.out.println("\n--- Sphere Details ---");
+        System.out.println("Radius: " + radius);
+        System.out.println("Surface Area: " + surfaceArea());
+        System.out.println("Volume: " + volume());
+    }
+
+    public static void main(String[] args) {
+        Sphere s = new Sphere();
+        s.accept();
+        s.display();
+    }
+}
